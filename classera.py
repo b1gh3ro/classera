@@ -9,6 +9,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 import keyboard
 from selenium.webdriver.common.keys import Keys
 from dhooks import Webhook
+from selenium.common.exceptions import NoSuchElementException
 hook = Webhook('***REMOVED***')
 PATH = "***REMOVED***"
 driver = webdriver.Chrome(PATH)
@@ -37,17 +38,23 @@ async def main():
     launch = driver.find_element_by_xpath('/html/body/div[6]/div/div[2]/div[5]/div[1]/div/div[2]/div[3]/div[4]/div[2]/table/tbody/tr[1]/td[5]/div/a')
     launchhov = ActionChains(driver)
     launchhov.move_to_element(launch).perform()
-    launch.click()   
-    time.sleep(5)
+    try:
+        launch = driver.find_element_by_xpath('/tml/body/div[6]/div/div[2]/div[5]/div[1]/div/div[2]/div[3]/div[4]/div[2]/table/tbody/tr[1]/td[5]/div/a')
+        launchhov = ActionChains(driver)
+        launchhov.move_to_element(launch).perform()
+        launch.click()
+        launched = ':white_check_mark: launched'
+    except  NoSuchElementException:
+        launched = ':negative_squared_cross_mark: launched'
+
+    time.sleep(2)
     copy = driver.find_element_by_xpath('/html/body/div[19]/div/div[10]/button[1]').click()
     time.sleep(5)
     keyboard.send("tab", do_press=True, do_release=True)
     time.sleep(1)   
-    keyboard.send("tab", do_press=True, do_release=True)
-    time.sleep(1)
     keyboard.send("space", do_press=True, do_release=True) 
-    hook.send('class joined')
     time.sleep(10)
+    hook.send(launched)
     driver.quit()
 
 asyncio.run(main())
