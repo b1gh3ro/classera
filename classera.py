@@ -22,9 +22,9 @@ def main():
     try:
         
         username = driver.find_element_by_id('UserUsername')
-        username.send_keys('***REMOVED***')
+        username.send_keys(<usename>)
         password = driver.find_element_by_id('UserPassword')
-        password.send_keys('***REMOVED***')
+        password.send_keys(<password>)
         password.send_keys(Keys.RETURN)
         
     except  NoSuchElementException:
