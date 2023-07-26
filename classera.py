@@ -11,8 +11,8 @@ import keyboard
 from selenium.webdriver.common.keys import Keys
 from dhooks import Webhook
 from selenium.common.exceptions import NoSuchElementException
-hook = Webhook('https://discord.com/api/webhooks/893099388015112222/gpQ5WnWgc2fJG0CTJY1YMAy9Jb9Rj96CnjDOBrlOW9DlBZ8R93jxutPxQYIz-tklvUCu')
-PATH = "***REMOVED*** 2"
+hook = Webhook('<your-webhook>')
+PATH = "<Path-to-chromedriver>"
 driver = webdriver.Chrome(PATH)
 driver.get('https://me.classera.com/student/vcrs')
 
